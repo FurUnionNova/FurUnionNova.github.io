@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   'use strict';
 
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -19,6 +19,8 @@
       const light = root.dataset.theme === 'light';
       toggle.textContent = light ? '☀' : '☾';
       toggle.setAttribute('aria-label', light ? '切换到深色模式' : '切换到浅色模式');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.content = light ? '#f5f8ff' : '#050b14';
     };
     sync();
     toggle.addEventListener('click', () => {

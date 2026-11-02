@@ -13,16 +13,17 @@
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preload" as="image" href="assets/img/fursona-08-480.webp" media="(max-width: 700px)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/img/fursona-08.webp" media="(min-width: 701px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/fursona-08-card-480.webp" media="(max-width: 700px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/fursona-08-card.webp" media="(min-width: 701px)" fetchpriority="high">
 
-<link rel="stylesheet" href="assets/style.css?v=20261102s">
+<script>try{var t=localStorage.getItem('blog-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css?v=20261102w">
 <link rel="icon" href="assets/img/avatar.webp">
 </head>
 <body class="portal menu-page">
 <picture>
-  <source media="(max-width: 700px)" srcset="assets/img/fursona-08-480.webp">
-  <img class="portal-bg" src="assets/img/fursona-08.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+  <source media="(max-width: 700px)" srcset="assets/img/fursona-08-card-480.webp">
+  <img class="portal-bg" src="assets/img/fursona-08-card.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
 </picture>
 <div class="portal-veil" aria-hidden="true"></div>
 
@@ -38,6 +39,7 @@
     <a href="about.html">关于</a>
     <a href="gallery.html">图集</a>
         <button class="music-toggle" type="button" aria-label="背景音乐" aria-pressed="false" title="开启背景音乐">♪</button>
+      <button class="theme-toggle" type="button" aria-label="切换主题">☾</button>
     </nav>
 </header>
 
@@ -48,14 +50,26 @@
 
   <div class="entries" data-stagger>
     <a class="entry entry-blog" href="blog.html">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/img/fursona-01-card-480.webp">
+        <img class="entry-img" src="assets/img/fursona-01-card.webp" width="480" height="679" alt="" decoding="async">
+      </picture>
       <span class="arrow" aria-hidden="true">↗</span>
       <span class="entry-body"><b>博客</b><span>踩过的坑、折腾记录、学习笔记</span></span>
     </a>
     <a class="entry entry-about" href="about.html">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/img/fursona-06-card-480.webp">
+        <img class="entry-img" src="assets/img/fursona-06-card.webp" width="480" height="679" alt="" decoding="async">
+      </picture>
       <span class="arrow" aria-hidden="true">↗</span>
       <span class="entry-body"><b>关于</b><span>福瑞企划、折腾史、我在做什么</span></span>
     </a>
     <a class="entry entry-gallery" href="gallery.html">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/img/fursona-08-card-480.webp">
+        <img class="entry-img" src="assets/img/fursona-08-card.webp" width="480" height="679" alt="" decoding="async">
+      </picture>
       <span class="arrow" aria-hidden="true">↗</span>
       <span class="entry-body"><b>图集</b><span>蓝色和粉色的约稿与合照</span></span>
     </a>
@@ -80,8 +94,8 @@
   <span>© <span data-year>2026</span> 绒萌 · 用 HTML 手写</span>
 </footer>
 
-<script src="assets/transition.js?v=20261102s" defer></script>
-<script src="assets/music.js?v=20261102s" defer></script>
-<script src="assets/blog.js?v=20261102s" defer></script>
+<script src="assets/transition.js?v=20261102w" defer></script>
+<script src="assets/music.js?v=20261102w" defer></script>
+<script src="assets/blog.js?v=20261102w" defer></script>
 </body>
 </html>

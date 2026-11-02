@@ -637,46 +637,48 @@ button { font: inherit; color: inherit; }
 }
 .entry {
   position: relative;
-  height: 220px;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .16);
-  background-size: cover;
-  background-position: center;
   display: flex;
-  align-items: flex-end;
-  padding: 20px;
+  flex-direction: column;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0d1728;
   color: #fff;
-  isolation: isolate;
-  transition: transform .2s ease, border-color .2s ease;
+  transition: background-color .15s ease;
 }
-.entry::before {
-  content: "";
+.entry > picture { display: block; width: 100%; }
+.entry-img {
+  width: 100%;
+  height: 130px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  flex: none;
+  background: #0d1728;
+}
+.entry-blog .entry-img { object-position: center 18%; }
+.entry-about .entry-img { object-position: center 42%; }
+.entry-gallery .entry-img { object-position: center 32%; }
+.entry:hover { text-decoration: none; background: #122036; }
+.entry .arrow {
   position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(180deg, rgba(5, 11, 20, .04), rgba(5, 11, 20, .86));
-  transition: opacity .2s ease;
+  top: 12px;
+  right: 14px;
+  font-size: 18px;
+  color: #fff;
+  opacity: .85;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .55);
 }
-.entry:hover { text-decoration: none; transform: translateY(-4px); border-color: rgba(94, 224, 255, .55); }
-.entry:hover::before { opacity: .75; }
-.entry .arrow { position: absolute; top: 14px; right: 16px; font-size: 18px; opacity: .75; }
-.entry-body b { display: block; font-size: 22px; margin-bottom: 2px; }
+.entry-body {
+  display: block;
+  width: 100%;
+  padding: 10px 16px 14px;
+  background: inherit;
+}
+.entry-body b { display: block; font-size: 20px; margin-bottom: 2px; }
 .entry-body span { font-size: 13px; color: rgba(242, 248, 255, .72); }
-.entry-blog {
-  background-image: url("img/fursona-01.webp");
-  background-image: image-set(url("img/fursona-01-bg.avif") type("image/avif"), url("img/fursona-01.webp") type("image/webp"));
-  background-position: center 18%;
-}
-.entry-about {
-  background-image: url("img/fursona-06.webp");
-  background-image: image-set(url("img/fursona-06-bg.avif") type("image/avif"), url("img/fursona-06.webp") type("image/webp"));
-}
-.entry-gallery {
-  background-image: url("img/fursona-08.webp");
-  background-image: image-set(url("img/fursona-08-bg.avif") type("image/avif"), url("img/fursona-08.webp") type("image/webp"));
-  background-position: center 32%;
-}
 .portal-foot {
   width: min(var(--maxw), calc(100% - 40px));
   margin: 0 auto;
@@ -778,7 +780,6 @@ button { font: inherit; color: inherit; }
 @media (max-width: 900px) {
   .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .entries { grid-template-columns: 1fr 1fr; }
-  .entry { height: 180px; }
 }
 
 @media (max-width: 700px) {
@@ -786,7 +787,6 @@ button { font: inherit; color: inherit; }
   .portal-main { padding: 36px 0; }
   .portal h1 { font-size: 38px; }
   .entries { grid-template-columns: 1fr; }
-  .entry { height: 150px; }
   .portal-nav { gap: 14px; font-size: 13px; }
   .gallery-grid { grid-template-columns: 1fr; }
   .portal-foot { flex-direction: column; gap: 6px; }
@@ -897,11 +897,13 @@ button { font: inherit; color: inherit; }
 /* ---------- 二级菜单：空格子 ---------- */
 .menu-page .portal-main { gap: 16px; }
 .entry-empty {
-  border: 1px dashed rgba(255, 255, 255, .22);
+  min-height: 150px;
+  justify-content: flex-end;
+  padding: 20px;
+  border: 0;
   background: rgba(255, 255, 255, .035);
   color: rgba(242, 248, 255, .78);
 }
-.entry-empty::before { display: none; }
 .entry-empty .plus {
   position: absolute;
   top: 12px;
@@ -910,12 +912,10 @@ button { font: inherit; color: inherit; }
   font-weight: 300;
   color: rgba(242, 248, 255, .35);
 }
+.entry-empty .entry-body { padding: 0; background: none; }
 .entry-empty .entry-body b { font-size: 18px; font-weight: 500; }
 .entry-empty .entry-body span { color: rgba(242, 248, 255, .4); }
-.entry-empty:hover {
-  transform: translateY(-4px);
-  border-color: rgba(94, 224, 255, .38);
-}
+.entry-empty:hover { background: rgba(255, 255, 255, .06); }
 .portal-foot a { color: rgba(242, 248, 255, .6); }
 .portal-foot a:hover { color: #fff; }
 
@@ -1004,35 +1004,73 @@ body.is-leaving {
 }
 
 @media (max-width: 700px) {
-  .entry-blog {
-    background-image: url("img/fursona-01-480.webp");
-  }
-  .entry-about {
-    background-image: url("img/fursona-06-480.webp");
-  }
-  .entry-gallery {
-    background-image: url("img/fursona-08-480.webp");
-  }
-}
-
-@media (max-width: 700px) {
   .portal-head { background: rgba(5, 11, 20, .88); }
   .welcome-head { background: rgba(5, 11, 20, .8); }
 }
 
 @media (max-width: 700px) {
   .portal-head { border-bottom: 0; box-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
-  .entry:not(.entry-empty) { border: 2px solid #050b14; }
-  .entry:not(.entry-empty)::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background:
-      linear-gradient(180deg, rgba(5, 11, 20, .4), transparent 16px),
-      linear-gradient(0deg, rgba(5, 11, 20, .4), transparent 16px);
-  }
-  .entry .arrow, .entry-body { position: relative; z-index: 2; }
 }
 img.is-missing { background: linear-gradient(135deg, #16263f, #0a1220); }
+
+
+/* ---------- 日间模式：一级、二级页 ---------- */
+[data-theme="light"] .welcome { background: #f5f8ff; color: #101a2c; }
+[data-theme="light"] .welcome-bg { opacity: .16; }
+[data-theme="light"] .welcome-veil {
+  background:
+    radial-gradient(90% 80% at 20% 35%, rgba(245, 248, 255, .35), rgba(245, 248, 255, .88) 70%),
+    linear-gradient(180deg, rgba(245, 248, 255, .65), rgba(245, 248, 255, .96));
+}
+[data-theme="light"] .welcome-head {
+  background: rgba(245, 248, 255, .88);
+  border-bottom-color: rgba(16, 26, 44, .12);
+}
+[data-theme="light"] .welcome .brand { color: #101a2c; }
+[data-theme="light"] .welcome .brand small,
+[data-theme="light"] .welcome-year,
+[data-theme="light"] .welcome-sub,
+[data-theme="light"] .welcome-foot,
+[data-theme="light"] .welcome-foot a { color: #5a6b85; }
+[data-theme="light"] .welcome-sub b { color: #0e93b8; }
+[data-theme="light"] .welcome-hint { color: #5a6b85; }
+[data-theme="light"] .enter-btn {
+  background: #101a2c;
+  color: #f5f8ff;
+  box-shadow: 0 12px 40px rgba(16, 26, 44, .12);
+}
+[data-theme="light"] .enter-btn:hover { box-shadow: 0 18px 54px rgba(16, 26, 44, .18); }
+[data-theme="light"] .music-toggle {
+  border-color: rgba(16, 26, 44, .16);
+  background: rgba(16, 26, 44, .04);
+  color: #101a2c;
+}
+[data-theme="light"] .portal { background: #f5f8ff; --p-text: #101a2c; color: #101a2c; }
+[data-theme="light"] .portal-veil {
+  background: linear-gradient(180deg, rgba(245, 248, 255, .35), rgba(245, 248, 255, .9));
+}
+[data-theme="light"] .portal-bg { opacity: .04; }
+[data-theme="light"] .portal-head {
+  background: rgba(245, 248, 255, .9);
+  border-bottom-color: rgba(16, 26, 44, .12);
+}
+[data-theme="light"] .portal-head .brand,
+[data-theme="light"] .portal-nav a { color: #101a2c; }
+[data-theme="light"] .portal-head .brand small { color: #5a6b85; }
+[data-theme="light"] .portal-nav a:hover { color: #0e93b8; }
+[data-theme="light"] .portal-foot a:hover,
+[data-theme="light"] .welcome-foot a:hover { color: #101a2c; }
+[data-theme="light"] .portal .eyebrow { color: #0e93b8; text-shadow: none; }
+[data-theme="light"] .portal h1 { color: #101a2c; }
+[data-theme="light"] .portal .lede { color: #2f3e55; }
+[data-theme="light"] .portal-foot { color: #5a6b85; border-color: rgba(16, 26, 44, .1); }
+[data-theme="light"] .portal-foot a { color: #5a6b85; }
+[data-theme="light"] .entry { background: #fff; color: #101a2c; }
+[data-theme="light"] .entry:hover { background: #eef3fb; }
+[data-theme="light"] .entry > picture { display: block; width: 100%; }
+.entry-img { background: #eaf1fb; }
+[data-theme="light"] .entry-body span { color: #5a6b85; }
+[data-theme="light"] .entry .arrow { color: #101a2c; text-shadow: none; }
+[data-theme="light"] .entry-empty { background: rgba(16, 26, 44, .045); color: #5a6b85; }
+[data-theme="light"] .entry-empty .entry-body span,
+[data-theme="light"] .entry-empty .plus { color: rgba(16, 26, 44, .4); }

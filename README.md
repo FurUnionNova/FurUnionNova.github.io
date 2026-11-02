@@ -60,16 +60,16 @@ node tools/check.mjs
 - 分享封面：`assets/img/og-cover.webp`（1200×630）
 - 欢迎页背景：`index.html` 的 `welcome-bg`（默认 `fursona-08.webp`）
 - 菜单页背景：`home.html` 的 `portal-bg`（默认 `fursona-08.webp`）
-- 入口卡片背景：`style.css` 里的 `.entry-blog` / `.entry-about` / `.entry-gallery`
+- 入口卡片图：`assets/img/fursona-xx-card.webp`（深色底合成，和卡片底栏同色；手机另有一份 `-card-480.webp`）
 
 图集页用的是原始比例，不裁切；换图后记得改 `gallery.html` 里的 `alt` 和 `figcaption`。
 
 ## 加载速度
 
 - 欢迎页/菜单页背景用 `<picture>` 按 **700px** 切 **480w / 800w WebP**，并 `preload` 对应尺寸；手机固定拿 480w（约 30KB）。
-- 入口卡片：桌面 800w AVIF/WebP；手机用 **480w WebP**（三张约 117KB，放弃 AVIF 以降低老手机解码卡顿）。
+- 入口卡片：桌面 800w；手机用 **480w WebP**（三张约 65KB），图片解码不阻塞主线程。
 - 头像压到 **256×256**（约 18KB）；512 图标只给 PWA 用，不在首屏加载。
-- 首屏背景只 `preload` 当前尺寸的一份，不做页面预取；卡片背景由 CSS 发现。
+- 首屏背景只 `preload` 当前尺寸的一份，不做页面预取；卡片图用 `<img>` + `decoding="async"`，不再走 CSS 背景。
 - 第一次打开仍受 GitHub Pages 网络影响；之后走浏览器缓存会快很多。
 
 ## 动画与音乐
@@ -92,7 +92,7 @@ node tools/check.mjs
 
 ## 主题
 
-- 一级欢迎页、二级菜单页固定深色，保证图片背景上的文字对比度；
+- 一级欢迎页、二级菜单页也支持主题切换；默认跟随系统，右上角按钮可切白/深，选择存进 `localStorage`；
 - 三级页面（博客 / 关于 / 图集 / 文章）首次访问跟随系统，点右上角按钮切换，选择存进 `localStorage`；
 - 想强制三级页面默认深色，把页面 `<head>` 里的主题脚本删掉即可（`<html>` 会使用 `:root` 的深色变量）。
 
@@ -102,7 +102,7 @@ node tools/check.mjs
 
 - 地址：<https://FurUnionNova.github.io/>
 - 仓库：`FurUnionNova/FurUnionNova.github.io`
-- 推送 `main` 后，`.github/workflows/pages.yml` 会自动发布，等 1 分钟左右。
+- 推送 `main` 后由 GitHub 自带的 `pages-build-deployment` 发布，等 1 分钟左右；自定义 `.github/workflows/pages.yml` 只保留手动触发，避免两个部署任务抢锁。
 
 换仓库时：把 `blog/` 里的文件推到仓库根目录，在 Settings → Pages 里把 Source 设为 **GitHub Actions**（或 Deploy from a branch → `main` / `/ (root)`）。
 
