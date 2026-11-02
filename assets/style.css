@@ -930,21 +930,55 @@ button { font: inherit; color: inherit; }
 [data-stagger] > *:nth-child(4) { animation-delay: .20s; }
 [data-stagger] > *:nth-child(5) { animation-delay: .25s; }
 [data-stagger] > *:nth-child(6) { animation-delay: .30s; }
-.welcome-main, .portal-main { animation: pageIn .45s ease backwards; }
-main.wrap { animation: slideInLeft .42s cubic-bezier(.2, .7, .2, 1) backwards; }
+.welcome-main, .portal-main { animation: pageIn .6s ease backwards; }
+main.wrap { animation: slideInLeft .7s cubic-bezier(.16, .84, .3, 1) backwards; }
 body.is-leaving {
   opacity: 0;
-  transition: opacity .16s ease;
+  transition: opacity .24s ease;
   pointer-events: none;
 }
 
 /* ---------- 桌面端星形鼠标 ---------- */
 @media (hover: hover) and (pointer: fine) {
-  html, body { cursor: url("img/cursor-star.png") 16 16, auto; }
-  a, button, [role="button"], summary, .chip {
-    cursor: url("img/cursor-star-hover.png") 16 16, pointer;
+  html, body { cursor: url("img/cursor-star.png") 3 3, auto; }
+  a, button, [role="button"], summary, .chip,
+  .theme-toggle, .music-toggle, .to-top {
+    cursor: url("img/cursor-star-hover.png") 3 3, pointer;
   }
 }
+
+/* ---------- 卡片铺满全屏 ---------- */
+.card-wipe {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: #050b14;
+  background-size: cover;
+  background-position: center;
+  will-change: left, top, width, height;
+  transition:
+    left .85s cubic-bezier(.5, .05, .2, 1),
+    top .85s cubic-bezier(.5, .05, .2, 1),
+    width .85s cubic-bezier(.5, .05, .2, 1),
+    height .85s cubic-bezier(.5, .05, .2, 1),
+    border-radius .85s ease;
+}
+.card-wipe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 11, 20, .04), rgba(5, 11, 20, .78));
+}
+.card-wipe .entry-body {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  z-index: 1;
+}
+.card-wipe .entry-body b { font-size: 28px; }
+.card-wipe .entry-body span { font-size: 14px; color: rgba(242, 248, 255, .75); }
+body.is-wiping { overflow: hidden; }
 
 /* ---------- 背景音乐按钮 ---------- */
 .music-toggle {

@@ -73,9 +73,10 @@ node tools/check.mjs
 
 ## 鼠标与页面过渡
 
-- **星形光标**：桌面端（`hover: hover` + `pointer: fine`）默认是白色四角星，悬停链接/按钮变成青色；图片在 `assets/img/cursor-star.png` 和 `cursor-star-hover.png`，32×32，热点在中心。手机/触屏不会启用。
-- **页面过渡**：`assets/transition.js` 拦截站内链接，先让旧页淡出 160ms，再跳转；三级页面的 `main` 从左侧 28px 滑入（420ms）。不支持 JS 时链接照常工作。
-- `prefers-reduced-motion` 下，滑入和淡出都会关闭。
+- **星形光标**：桌面端（`hover: hover` + `pointer: fine`）是一个四角星，其中一个角拉长成箭头尖，热点在尖端（`3,3`）；悬停链接/按钮变成青色。图片在 `assets/img/cursor-star.png` 和 `cursor-star-hover.png`，32×32。手机/触屏不会启用。
+- **页面过渡**：普通站内链接先淡出 240ms，再跳转；三级页面的 `main` 从左侧 36px 滑入（700ms）。不支持 JS 时链接照常工作。
+- **卡片铺满**：在二级菜单点博客/关于/图集时，卡片连同背景图从原位置扩展到全屏（850ms，先慢、中段加速、收尾减速，不是匀速），铺满后再进入三级页。
+- `prefers-reduced-motion` 下，滑入、淡出和卡片铺满都会关闭。
 
 ## 改配色
 
