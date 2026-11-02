@@ -913,6 +913,10 @@ button { font: inherit; color: inherit; }
   from { opacity: 0; }
   to { opacity: 1; }
 }
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: none; }
+}
 .reveal { animation: riseIn .8s cubic-bezier(.2, .7, .2, 1) backwards; }
 .welcome-main > .reveal:nth-child(1) { animation-delay: .05s; }
 .welcome-main > .reveal:nth-child(2) { animation-delay: .13s; }
@@ -926,7 +930,21 @@ button { font: inherit; color: inherit; }
 [data-stagger] > *:nth-child(4) { animation-delay: .20s; }
 [data-stagger] > *:nth-child(5) { animation-delay: .25s; }
 [data-stagger] > *:nth-child(6) { animation-delay: .30s; }
-.welcome-main, .portal-main, main.wrap { animation: pageIn .45s ease backwards; }
+.welcome-main, .portal-main { animation: pageIn .45s ease backwards; }
+main.wrap { animation: slideInLeft .42s cubic-bezier(.2, .7, .2, 1) backwards; }
+body.is-leaving {
+  opacity: 0;
+  transition: opacity .16s ease;
+  pointer-events: none;
+}
+
+/* ---------- 桌面端星形鼠标 ---------- */
+@media (hover: hover) and (pointer: fine) {
+  html, body { cursor: url("img/cursor-star.png") 16 16, auto; }
+  a, button, [role="button"], summary, .chip {
+    cursor: url("img/cursor-star-hover.png") 16 16, pointer;
+  }
+}
 
 /* ---------- 背景音乐按钮 ---------- */
 .music-toggle {
@@ -991,4 +1009,5 @@ button { font: inherit; color: inherit; }
   .reveal, [data-stagger] > *, .welcome-main, .portal-main, main.wrap {
     animation: none !important;
   }
+  body.is-leaving { opacity: 1; transition: none; }
 }
