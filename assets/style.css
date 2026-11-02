@@ -1023,9 +1023,11 @@ html.is-loading::after {
 }
 html.is-loading.is-ready::before,
 html.is-loading.is-ready::after { opacity: 0; }
-html.is-loading main.wrap,
-html.is-loading .portal-main,
-html.is-loading .welcome-main { animation: none !important; }
+html.has-loader .welcome-main,
+html.has-loader .portal-main,
+html.has-loader main.wrap,
+html.has-loader .reveal,
+html.has-loader [data-stagger] > * { animation: none !important; }
 @keyframes loaderGlow {
   0%, 100% { filter: brightness(.85); }
   50% { filter: brightness(1.2); }
