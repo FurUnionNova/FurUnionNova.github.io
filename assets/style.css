@@ -31,8 +31,20 @@
 * { box-sizing: border-box; }
 
 html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
+  scrollbar-color: rgba(147, 167, 196, .35) transparent;
+}
+
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(147, 167, 196, .3);
+  border: 3px solid transparent;
+  border-radius: 8px;
+  background-clip: content-box;
 }
 
 body {
