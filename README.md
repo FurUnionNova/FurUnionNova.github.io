@@ -2,10 +2,11 @@
 
 一个纯静态的个人博客：HTML + CSS + 原生 JS，零依赖、零构建、断网可看。
 
-## 结构（两级）
+## 结构（三级）
 
-1. **一级页 `index.html`**：图片门户。满屏兽设背景 + 三个入口（博客 / 关于 / 图集）。
-2. **二级页**：
+1. **一级页 `index.html`**：欢迎页。满屏兽设背景 + “欢迎来到我的 blog” + **点击进入**。
+2. **二级页 `home.html`**：入口卡片。目前 3 张（博客 / 关于 / 图集）+ 3 张空白占位卡，以后继续往网格里加。
+3. **三级页**：
    - `blog.html`：博客索引，标签筛选（全部 / DSH / 折腾 / 前端）+ 空状态；
    - `about.html`：关于我、F.U.N. 企划、折腾史；
    - `gallery.html`：兽设图集，点图看原图；
@@ -21,16 +22,18 @@
 
 ```
 blog/
-├─ index.html          # 一级页：图片门户
-├─ blog.html           # 二级页：博客索引 + 标签筛选
-├─ about.html          # 二级页：关于
-├─ gallery.html        # 二级页：图集
+├─ index.html          # 一级页：欢迎页
+├─ home.html           # 二级页：入口卡片（3 个 + 3 个空白）
+├─ blog.html           # 三级页：博客索引 + 标签筛选
+├─ about.html          # 三级页：关于
+├─ gallery.html        # 三级页：图集
 ├─ 404.html            # 404
 ├─ _template.html      # 新文章模板（不对外链接）
 ├─ posts/              # 文章（目前只有 placeholder.html 占位页）
 ├─ assets/
-│  ├─ style.css        # 全部样式
+│  ├─ style.css        # 全部样式 + 动画
 │  ├─ blog.js          # 主题、目录、进度、复制、标签筛选
+│  ├─ music.js         # Web Audio 背景音乐（无音频文件）
 │  └─ img/             # 头像、兽设图、分享封面
 ├─ tools/check.mjs     # 零依赖自检
 └─ docs/               # 截图
@@ -54,11 +57,18 @@ node tools/check.mjs
 - 头像：`assets/img/avatar.webp`（正方形，建议 512×512）
 - 兽设图：`assets/img/fursona-01/02/03/05/06/08.webp`（只放约稿；设定图在 `../private/fursona/ref/`，不部署）
 - 分享封面：`assets/img/og-cover.webp`（1200×630）
-- 门户背景：`index.html` 顶部的 `portal-bg`（默认 `fursona-08.webp`）
+- 欢迎页背景：`index.html` 的 `welcome-bg`（默认 `fursona-08.webp`）
+- 菜单页背景：`home.html` 的 `portal-bg`（默认 `fursona-08.webp`）
 - 入口卡片背景：`style.css` 里的 `.entry-blog` / `.entry-about` / `.entry-gallery`
 
 图集页用的是原始比例，不裁切；换图后记得改 `gallery.html` 里的 `alt` 和 `figcaption`。
 
+## 动画与音乐
+
+- **动画**：欢迎页标题/按钮逐个淡入，菜单卡片错开上浮，背景缓慢放大；`prefers-reduced-motion` 下全部关闭。
+- **音乐**：`assets/music.js` 用 Web Audio 现场合成一段轻环境音（Dm7–Cmaj7–Fmaj7–G7，加一点延迟），**没有音频文件、没有版权问题、也不增加下载体积**。
+- 右上角 `♪` 按钮开关；第一次需要点击（浏览器不允许自动播放）。欢迎页点“点击进入”会记住“音乐开”，进入菜单后会尝试续播。
+- 因为页面是纯静态、每次跳转会重新加载，音乐**不会跨页面连续播放**；换页后点一下 `♪` 就会继续。
 
 ## 改配色
 
@@ -66,18 +76,19 @@ node tools/check.mjs
 
 ## 主题
 
-- 一级门户（`index.html`）固定深色，保证图片背景上的文字对比度；
-- 二级页面（博客 / 关于 / 图集 / 文章）首次访问跟随系统，点右上角按钮切换，选择存进 `localStorage`；
-- 想强制二级页面默认深色，把页面 `<head>` 里的主题脚本删掉即可（`<html>` 会使用 `:root` 的深色变量）。
-
+- 一级欢迎页、二级菜单页固定深色，保证图片背景上的文字对比度；
+- 三级页面（博客 / 关于 / 图集 / 文章）首次访问跟随系统，点右上角按钮切换，选择存进 `localStorage`；
+- 想强制三级页面默认深色，把页面 `<head>` 里的主题脚本删掉即可（`<html>` 会使用 `:root` 的深色变量）。
 
 ## 部署到 GitHub Pages
 
-1. 新建一个仓库，把 `blog/` 里的文件推到仓库根目录；
-2. 仓库 Settings → Pages → Source 选 “Deploy from a branch”，分支选 `main`，目录选 `/ (root)`；
-3. 等一两分钟，访问 `https://<用户名>.github.io/<仓库名>/`。
+当前已部署：
 
-不需要构建步骤，推上去就能用。
+- 地址：<https://FurUnionNova.github.io/>
+- 仓库：`FurUnionNova/FurUnionNova.github.io`
+- 推送 `main` 后，`.github/workflows/pages.yml` 会自动发布，等 1 分钟左右。
+
+换仓库时：把 `blog/` 里的文件推到仓库根目录，在 Settings → Pages 里把 Source 设为 **GitHub Actions**（或 Deploy from a branch → `main` / `/ (root)`）。
 
 ## 自检
 
@@ -101,4 +112,5 @@ node tools/check.mjs
 
 - 文字用系统字体渲染，不同电脑上字形会略有差别。
 - 没有评论、搜索、分页；文章多了以后可以再加。
+- 背景音乐受浏览器自动播放限制，第一次要手动点一下；换页后不会连续播放。
 - 截图在 `docs/`，是用 Edge 无头模式生成的；无头模式下最小布局宽度约 492px，所以手机截图按 500px 宽生成。
