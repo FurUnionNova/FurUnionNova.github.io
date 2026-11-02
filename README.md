@@ -60,7 +60,7 @@ node tools/check.mjs
 - 分享封面：`assets/img/og-cover.webp`（1200×630）
 - 欢迎页背景：`index.html` 的 `welcome-bg`（默认 `fursona-08.webp`）
 - 菜单页背景：`home.html` 的 `portal-bg`（默认 `fursona-08.webp`）
-- 入口卡片图：`assets/img/fursona-xx-card.webp`（深色底合成，和卡片底栏同色；手机另有一份 `-card-480.webp`）
+- 入口卡片图：`assets/img/fursona-xx-card.webp`（深色底合成，和卡片深色底同色；手机另有一份 `-card-480.webp`）；卡片文字直接浮在图片下缘，不另加实色底栏。
 
 图集页用的是原始比例，不裁切；换图后记得改 `gallery.html` 里的 `alt` 和 `figcaption`。
 
