@@ -963,7 +963,7 @@ body.is-loading .site-footer {
   place-content: center;
   justify-items: center;
   gap: 14px;
-  background: rgba(5, 11, 20, .8);
+  background: #050b14;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   opacity: 0;
@@ -990,6 +990,46 @@ body.is-loading .site-footer {
   letter-spacing: 3px;
 }
 @keyframes loaderSpin { to { transform: rotate(360deg); } }
+
+/* ---------- 跨页加载层：新页先盖住，再慢慢淡出 ---------- */
+html.is-loading::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #050b14;
+  opacity: 1;
+  transition: opacity .65s ease;
+  pointer-events: auto;
+}
+html.is-loading::after {
+  content: "✦\A 正在加载…";
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: grid;
+  place-items: center;
+  white-space: pre-line;
+  text-align: center;
+  color: #8ff0ff;
+  font-size: 14px;
+  line-height: 2.1;
+  letter-spacing: 3px;
+  text-shadow: 0 0 24px rgba(94, 224, 255, .5);
+  opacity: 1;
+  transition: opacity .65s ease;
+  pointer-events: auto;
+  animation: loaderGlow 1.8s ease-in-out infinite;
+}
+html.is-loading.is-ready::before,
+html.is-loading.is-ready::after { opacity: 0; }
+html.is-loading main.wrap,
+html.is-loading .portal-main,
+html.is-loading .welcome-main { animation: none !important; }
+@keyframes loaderGlow {
+  0%, 100% { filter: brightness(.85); }
+  50% { filter: brightness(1.2); }
+}
 
 /* ---------- 背景音乐按钮 ---------- */
 .music-toggle {
@@ -1065,4 +1105,6 @@ body.is-loading .site-footer {
   body.is-loading .site-footer { transition: none; opacity: 1; }
   .page-loader { transition: none; }
   .loader-star { animation: none; }
+  html.is-loading::before,
+  html.is-loading::after { transition: none; animation: none; }
 }

@@ -1,5 +1,23 @@
-/* 页面切换：加载层 + 预取目标页 + 淡出/滑入（无框架） */
+/* 页面切换：加载层 + 预取目标页 + 跨页淡出（无框架） */
 (() => {
+  const root = document.documentElement;
+
+  function revealIncoming() {
+    if (!root.classList.contains('is-loading')) return;
+    window.requestAnimationFrame(() => {
+      root.classList.add('is-ready');
+      window.setTimeout(() => root.classList.remove('is-loading', 'is-ready'), 800);
+    });
+  }
+
+  if (root.classList.contains('is-loading')) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => window.setTimeout(revealIncoming, 120), { once: true });
+    } else {
+      window.setTimeout(revealIncoming, 120);
+    }
+  }
+
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   let loader = null;
@@ -84,16 +102,20 @@
       .finally(() => window.clearTimeout(timeout));
 
     Promise.all([minWait, fetched]).then(() => {
+      try { sessionStorage.setItem('page-loading', '1'); } catch { /* ignore */ }
       location.href = url.href;
     });
   });
 
-  window.addEventListener('pageshow', () => {
+  window.addEventListener('pageshow', (event) => {
     navigating = false;
     document.body.classList.remove('is-loading');
-    if (loader) {
-      loader.remove();
-      loader = null;
+    if (event.persisted) {
+      root.classList.remove('is-loading', 'is-ready');
+      if (loader) {
+        loader.remove();
+        loader = null;
+      }
     }
   });
 
