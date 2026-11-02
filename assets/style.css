@@ -1087,3 +1087,18 @@ html.has-loader [data-stagger] > * { animation: none !important; }
   .page-loader { transition: none; }
   .loader-star { animation: none; }
 }
+
+@media (max-width: 700px) {
+  .entry-blog {
+    background-image: url("img/fursona-01-480.webp");
+    background-image: image-set(url("img/fursona-01-480.avif") type("image/avif"), url("img/fursona-01-480.webp") type("image/webp"));
+  }
+  .entry-about {
+    background-image: url("img/fursona-06-480.webp");
+    background-image: image-set(url("img/fursona-06-480.avif") type("image/avif"), url("img/fursona-06-480.webp") type("image/webp"));
+  }
+  .entry-gallery {
+    background-image: url("img/fursona-08-480.webp");
+    background-image: image-set(url("img/fursona-08-480.avif") type("image/avif"), url("img/fursona-08-480.webp") type("image/webp"));
+  }
+}

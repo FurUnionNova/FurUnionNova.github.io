@@ -1,4 +1,4 @@
-﻿/* 页面切换：加载层 + 预取目标页 + 跨页淡出（无框架） */
+/* 页面切换：加载层 + 预取目标页 + 跨页淡出（无框架） */
 (() => {
   const root = document.documentElement;
   const star = document.querySelector('.loader-star');
@@ -128,10 +128,14 @@
     }
   });
 
-  const idle = window.requestIdleCallback || ((fn) => window.setTimeout(fn, 800));
-  idle(() => {
+  const prefetchMenu = () => {
     if (document.body.classList.contains('menu-page')) {
       ['blog.html', 'about.html', 'gallery.html'].forEach(prefetch);
     }
-  });
+  };
+  if (document.readyState === 'complete') {
+    window.setTimeout(prefetchMenu, 600);
+  } else {
+    window.addEventListener('load', () => window.setTimeout(prefetchMenu, 600), { once: true });
+  }
 })();

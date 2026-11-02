@@ -1,4 +1,4 @@
-﻿# 绒萌的赛博手记
+# 绒萌的赛博手记
 
 一个纯静态的个人博客：HTML + CSS + 原生 JS，零依赖、零构建、断网可看。
 
@@ -63,6 +63,14 @@ node tools/check.mjs
 - 入口卡片背景：`style.css` 里的 `.entry-blog` / `.entry-about` / `.entry-gallery`
 
 图集页用的是原始比例，不裁切；换图后记得改 `gallery.html` 里的 `alt` 和 `figcaption`。
+
+## 加载速度
+
+- 欢迎页/菜单页背景用 `<picture>` 选 **480w / 800w AVIF**，浏览器按屏幕和 DPR 自己挑，桌面也只用 800w。
+- 入口卡片：桌面 800w AVIF/WebP，手机切到 **480w AVIF/WebP**（三张合计约 50KB）。
+- 头像压到 **256×256**（约 18KB）；512 图标只给 PWA 用，不在首屏加载。
+- 首页背景加了 `preload`，卡片背景由 CSS 发现；页面预取延后到 `load` 之后，避免和首屏图片抢带宽。
+- 第一次打开仍受 GitHub Pages 网络影响；之后走浏览器缓存会快很多。
 
 ## 动画与音乐
 
