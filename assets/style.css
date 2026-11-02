@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: dark;
   --bg: #0a1220;
   --bg-soft: #0f1b2e;
@@ -31,11 +31,17 @@
 * { box-sizing: border-box; }
 
 html {
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
-  scrollbar-color: rgba(147, 167, 196, .35) transparent;
+}
+
+/* 只在桌面端固定滚动条槽；手机用 overlay 滚动条，强制 overflow 反而可能破坏 sticky */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    scrollbar-color: rgba(147, 167, 196, .35) transparent;
+  }
 }
 
 ::-webkit-scrollbar { width: 12px; }
@@ -1007,4 +1013,9 @@ body.is-leaving {
     background-image: url("img/fursona-08-480.webp");
     background-image: image-set(url("img/fursona-08-480.avif") type("image/avif"), url("img/fursona-08-480.webp") type("image/webp"));
   }
+}
+
+@media (max-width: 700px) {
+  .portal-head { background: rgba(5, 11, 20, .88); }
+  .welcome-head { background: rgba(5, 11, 20, .8); }
 }
