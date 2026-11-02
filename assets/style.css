@@ -37,7 +37,6 @@ html {
 
 body {
   margin: 0;
-  overflow-x: hidden;
   background:
     radial-gradient(900px 500px at 15% -10%, rgba(94, 224, 255, .10), transparent 60%),
     radial-gradient(700px 420px at 100% 0%, rgba(139, 123, 255, .10), transparent 55%),
@@ -562,27 +561,16 @@ button { font: inherit; color: inherit; }
   position: sticky;
   top: 0;
   z-index: 60;
-  isolation: isolate;
-  width: min(var(--maxw), calc(100% - 40px));
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 0;
-}
-.portal-head::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
-  transform: translateX(-50%);
-  background: rgba(5, 11, 20, .55);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  padding: 22px max(20px, calc((100% - var(--maxw)) / 2));
+  background: rgba(5, 11, 20, .58);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, .08);
-  z-index: -1;
 }
 .portal .brand { color: var(--p-text); }
 .portal .brand small { color: rgba(242, 248, 255, .55); }
@@ -813,28 +801,17 @@ button { font: inherit; color: inherit; }
   position: sticky;
   top: 0;
   z-index: 60;
-  isolation: isolate;
-  width: min(var(--maxw), calc(100% - 40px));
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 22px 0;
-}
-.welcome-head::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
-  transform: translateX(-50%);
+  padding: 22px max(20px, calc((100% - var(--maxw)) / 2));
   background: rgba(5, 11, 20, .5);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, .07);
-  z-index: -1;
 }
 .welcome .brand { color: #f2f8ff; }
 .welcome .brand small { color: rgba(242, 248, 255, .55); }
