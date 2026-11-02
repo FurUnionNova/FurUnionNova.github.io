@@ -925,11 +925,6 @@ button { font: inherit; color: inherit; }
   to { opacity: 1; }
 }
 .welcome-main, .portal-main, main.wrap { animation: pageFade .85s ease backwards; }
-body.is-leaving {
-  opacity: 0;
-  transition: opacity .32s ease;
-  pointer-events: none;
-}
 
 /* ---------- 桌面端星形鼠标 ---------- */
 @media (hover: hover) and (pointer: fine) {
@@ -1000,7 +995,6 @@ body.is-leaving {
 
 @media (prefers-reduced-motion: reduce) {
   .welcome-main, .portal-main, main.wrap { animation: none !important; }
-  body.is-leaving { opacity: 1; transition: none; }
 }
 
 @media (max-width: 700px) {
@@ -1074,3 +1068,26 @@ img.is-missing { background: linear-gradient(135deg, #16263f, #0a1220); }
 [data-theme="light"] .entry-empty { background: rgba(16, 26, 44, .045); color: #5a6b85; }
 [data-theme="light"] .entry-empty .entry-body span,
 [data-theme="light"] .entry-empty .plus { color: rgba(16, 26, 44, .4); }
+
+
+/* ---------- 返回上级：双折线箭头 ---------- */
+.crumb-back, .back-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  color: var(--muted);
+  font-size: 13px;
+}
+.crumb-back { margin-right: 2px; }
+.back-inline { margin-bottom: 2px; }
+.crumb-back:hover, .back-inline:hover { color: var(--text); text-decoration: none; }
+.crumb-back svg, .back-inline svg { flex: none; display: block; }
+
+@media (max-width: 560px) {
+  .site-header .nav { flex-wrap: nowrap; white-space: nowrap; gap: 10px; }
+  .site-header .nav a[href="index.html"],
+  .site-header .nav a[href="../index.html"],
+  .site-header .nav a[href*="github.com"],
+  .site-header .nav a[aria-current="page"] { display: none; }
+}
