@@ -247,7 +247,10 @@ button { font: inherit; color: inherit; }
   left: 0;
   top: 0;
   height: 3px;
-  width: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   z-index: 60;
 }
@@ -1019,7 +1022,7 @@ body.is-leaving {
 
 @media (max-width: 700px) {
   .portal-head { border-bottom: 0; box-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
-  .entry:not(.entry-empty) { border-color: rgba(255, 255, 255, .05); }
+  .entry:not(.entry-empty) { border: 3px solid #050b14; }
   .entry:not(.entry-empty)::after {
     content: "";
     position: absolute;
@@ -1032,3 +1035,4 @@ body.is-leaving {
   }
   .entry .arrow, .entry-body { position: relative; z-index: 2; }
 }
+img.is-missing { background: linear-gradient(135deg, #16263f, #0a1220); }

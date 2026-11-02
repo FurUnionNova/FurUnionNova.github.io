@@ -157,19 +157,22 @@
       || document.querySelector('.portal-nav')
       || document.querySelector('.welcome-head');
     if (!host) return;
-    button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'music-toggle';
-    button.setAttribute('aria-label', '背景音乐');
-    button.setAttribute('aria-pressed', 'false');
-    button.textContent = '♪';
+    button = host.querySelector('.music-toggle');
+    if (!button) {
+      button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'music-toggle';
+      button.setAttribute('aria-label', '背景音乐');
+      button.setAttribute('aria-pressed', 'false');
+      button.textContent = '♪';
+      const theme = host.querySelector('.theme-toggle');
+      if (theme) host.insertBefore(button, theme);
+      else host.appendChild(button);
+    }
     button.addEventListener('click', () => {
       if (playing) stop();
       else start();
     });
-    const theme = host.querySelector('.theme-toggle');
-    if (theme) host.insertBefore(button, theme);
-    else host.appendChild(button);
     update();
 
     const enter = document.querySelector('[data-enter]');

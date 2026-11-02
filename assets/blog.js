@@ -98,17 +98,36 @@
     }
   }
 
-  /* ---------- 阅读进度 ---------- */
+  /* ---------- 阅读进度 + 返回顶部（rAF 合并，避免滚动时反复读布局） ---------- */
   const bar = $('.progress');
-  if (bar) {
-    const update = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-      bar.style.width = `${p * 100}%`;
+  const toTop = $('.to-top');
+  if (bar || toTop) {
+    let maxScroll = 0;
+    let queued = false;
+    const measure = () => {
+      maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
     };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    const paint = () => {
+      queued = false;
+      const y = window.scrollY;
+      if (bar) {
+        const p = maxScroll > 0 ? Math.min(1, Math.max(0, y / maxScroll)) : 0;
+        bar.style.transform = `scaleX(${p})`;
+      }
+      if (toTop) toTop.classList.toggle('show', y > 500);
+    };
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(paint);
+    };
+    measure();
+    paint();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => { measure(); onScroll(); }, { passive: true });
+    window.addEventListener('load', measure, { once: true });
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(document.body);
+    if (toTop) toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
 
   /* ---------- 代码复制 ---------- */
@@ -130,14 +149,7 @@
     pre.appendChild(btn);
   });
 
-  /* ---------- 返回顶部 ---------- */
-  const toTop = $('.to-top');
-  if (toTop) {
-    const sync = () => toTop.classList.toggle('show', window.scrollY > 500);
-    sync();
-    window.addEventListener('scroll', sync, { passive: true });
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
+  
 
   /* ---------- 缺图占位 ---------- */
   $$('.gallery img').forEach((img) => {
