@@ -13,12 +13,17 @@
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="site.webmanifest">
+<link rel="preload" as="image" href="assets/img/fursona-08-480.webp" media="(max-width: 700px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/fursona-08.webp" media="(min-width: 701px)" fetchpriority="high">
 
-<link rel="stylesheet" href="assets/style.css?v=20261102n">
+<link rel="stylesheet" href="assets/style.css?v=20261102p">
 <link rel="icon" href="assets/img/avatar.webp">
 </head>
 <body class="portal menu-page">
-<img class="portal-bg" src="assets/img/fursona-08.webp" srcset="assets/img/fursona-08-480.webp 480w, assets/img/fursona-08.webp 800w" sizes="100vw" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+<picture>
+  <source media="(max-width: 700px)" srcset="assets/img/fursona-08-480.webp">
+  <img class="portal-bg" src="assets/img/fursona-08.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+</picture>
 <div class="portal-veil" aria-hidden="true"></div>
 
 <header class="portal-head">
@@ -74,8 +79,8 @@
   <span>© <span data-year>2026</span> 绒萌 · 用 HTML 手写</span>
 </footer>
 
-<script src="assets/transition.js?v=20261102n" defer></script>
-<script src="assets/music.js?v=20261102n" defer></script>
-<script src="assets/blog.js?v=20261102n" defer></script>
+<script src="assets/transition.js?v=20261102p" defer></script>
+<script src="assets/music.js?v=20261102p" defer></script>
+<script src="assets/blog.js?v=20261102p" defer></script>
 </body>
 </html>
