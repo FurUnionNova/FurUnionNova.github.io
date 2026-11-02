@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>博客 · 绒萌的赛博手记</title>
+<meta name="description" content="博客页面框架：标签分类、文章卡片与文章页占位。">
+<meta property="og:title" content="博客 · 绒萌的赛博手记">
+<meta property="og:description" content="博客页面框架，内容整理中。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og-cover.webp">
+<meta name="theme-color" content="#0a1220">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="site.webmanifest">
+<script>try{var t=localStorage.getItem('blog-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="assets/img/avatar.webp">
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/img/avatar.webp" alt="绒萌的兽设头像" width="34" height="34">
+      <span>绒萌的赛博手记<small>FurUnionNova Notes</small></span>
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="blog.html" aria-current="page">博客</a>
+      <a href="about.html">关于</a>
+      <a href="gallery.html">图集</a>
+      <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+      <button class="theme-toggle" type="button" aria-label="切换主题">☾</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <section class="hub-hero">
+    <p class="eyebrow">BLOG</p>
+    <h1>博客</h1>
+    <p class="lede">框架先搭好：标签分类、文章卡片、文章页都就位了，内容之后再填。</p>
+  </section>
+
+  <div class="filters" role="group" aria-label="按标签筛选">
+    <button class="chip" type="button" data-filter="all" aria-pressed="true">全部</button>
+    <button class="chip" type="button" data-filter="dsh" aria-pressed="false">DSH</button>
+    <button class="chip" type="button" data-filter="折腾" aria-pressed="false">折腾</button>
+    <button class="chip" type="button" data-filter="前端" aria-pressed="false">前端</button>
+  </div>
+  <p class="filter-count" aria-live="polite">共 0 篇</p>
+
+  <div class="post-grid" id="post-list"></div>
+
+  <section class="empty-state">
+    <div class="blank-frame" role="img" aria-label="暂无文章">
+      <span>暂无文章</span>
+    </div>
+    <h2>内容整理中</h2>
+    <p>页面结构已经搭好，文章会陆续放进来。</p>
+    <a class="btn" href="posts/placeholder.html">预览文章页框架 →</a>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span data-year>2026</span> 绒萌 · 用 HTML 手写</span>
+    <span>纯静态 · 无追踪 · 断网可看</span>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="assets/blog.js" defer></script>
+</body>
+</html>

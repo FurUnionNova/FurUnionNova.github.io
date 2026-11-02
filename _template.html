@@ -1,0 +1,90 @@
+﻿<!doctype html>
+<!--
+  新文章模板：
+  1. 复制本文件到 posts/，改文件名（英文短横线，例如 my-first-post.html）
+  2. 改 <title>、<meta name="description">、<h1>、<time datetime>、标签
+  3. 正文写在 <div class="prose"> 里，用 h2 / h3 / p / ul / pre><code
+  4. 回到 index.html，在 .post-list 里加一张卡片，链接指向新文件
+  5. 运行 node tools/check.mjs 检查链接
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文章标题 · 绒萌的赛博手记</title>
+<meta name="description" content="一句话摘要。">
+<meta property="og:title" content="文章标题">
+<meta property="og:type" content="article">
+<script>try{var t=localStorage.getItem('blog-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="../assets/img/avatar.webp">
+<meta name="theme-color" content="#0a1220">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="../site.webmanifest">
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<div class="progress" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <img src="../assets/img/avatar.webp" alt="绒萌的兽设头像" width="34" height="34">
+      <span>绒萌的赛博手记<small>FurUnionNova Notes</small></span>
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="../blog.html">博客</a>
+      <a href="../about.html">关于</a>
+      <a href="../gallery.html">图集</a>
+      <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+      <button class="theme-toggle" type="button" aria-label="切换主题">☾</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap article-layout">
+  <article>
+    <header class="article-head">
+      <h1>文章标题</h1>
+      <div class="meta">
+        <time datetime="2026-01-01">2026-01-01</time>
+        <span>·</span>
+        <span data-reading-time>—</span>
+        <span>·</span>
+        <span class="tag">标签</span>
+      </div>
+    </header>
+
+    <div class="prose">
+      <p>第一段。</p>
+      <h2>小标题</h2>
+      <p>正文。</p>
+    </div>
+
+    <div class="author">
+      <img src="../assets/img/avatar.webp" alt="绒萌的兽设头像" width="52" height="52">
+      <div><b>绒萌</b><span>一个正在学编程的人，记录踩过的坑。</span></div>
+    </div>
+
+    <nav class="pager" aria-label="文章导航">
+      <a href="../index.html"><span>返回</span>首页</a>
+      <span></span>
+    </nav>
+  </article>
+
+  <aside class="toc" data-toc aria-label="目录"></aside>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span data-year>2026</span> 绒萌 · 用 HTML 手写</span>
+    <span>纯静态 · 无追踪 · 断网可看</span>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="../assets/blog.js" defer></script>
+</body>
+</html>

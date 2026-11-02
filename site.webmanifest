@@ -1,0 +1,15 @@
+{
+  "name": "绒萌的赛博手记",
+  "short_name": "绒萌手记",
+  "description": "一个福瑞控的硬件折腾与编程学习记录。",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#050b14",
+  "theme_color": "#0a1220",
+  "icons": [
+    { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
