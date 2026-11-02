@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   'use strict';
 
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -161,6 +161,24 @@
     });
   });
 
+  /* ---------- 复制微信号 ---------- */
+  const socialStatus = $('.social-status');
+  let socialTimer = 0;
+  $$('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        if (socialStatus) {
+          socialStatus.textContent = '微信号已复制';
+          clearTimeout(socialTimer);
+          socialTimer = setTimeout(() => { socialStatus.textContent = ''; }, 1600);
+        }
+      } catch {
+        window.prompt('复制微信号', text);
+      }
+    });
+  });
   /* ---------- 年份 ---------- */
   $$('[data-year]').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
 })();

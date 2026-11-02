@@ -1103,3 +1103,50 @@ img.is-missing { background: linear-gradient(135deg, #16263f, #0a1220); }
   .site-header .nav a[href*="github.com"],
   .site-header .nav a[aria-current="page"] { display: none; }
 }
+
+/* ---------- 页脚署名与联系方式 ---------- */
+.site-credit {
+  width: min(var(--maxw), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 18px 0 calc(22px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+  opacity: .8;
+}
+.site-credit p { margin: 2px 0; }
+.credit-built { font-size: 12px; }
+.credit-handles { font-size: 10.5px; word-break: break-word; }
+.credit-note { font-size: 10.5px; opacity: .7; }
+.social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 8px 0 4px;
+}
+.social-btn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.social-btn svg { width: 15px; height: 15px; fill: currentColor; display: block; }
+.social-btn:hover, .social-btn:focus-visible {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+.social-status {
+  display: block;
+  min-height: 1.2em;
+  font-size: 11px;
+  color: var(--accent);
+}
