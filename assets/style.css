@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: dark;
   --bg: #0a1220;
   --bg-soft: #0f1b2e;
@@ -997,7 +997,6 @@ html.is-loading.is-ready .page-loader {
   line-height: 1;
   color: #8ff0ff;
   text-shadow: 0 0 28px rgba(94, 224, 255, .55);
-  animation: loaderSpin 1.8s linear infinite;
 }
 .page-loader p {
   margin: 0;
@@ -1005,7 +1004,6 @@ html.is-loading.is-ready .page-loader {
   font-size: 13px;
   letter-spacing: 3px;
 }
-@keyframes loaderSpin { to { transform: rotate(360deg); } }
 
 /* 从加载层进入的页面：入场动画保持关闭，避免 loading 结束后重播 */
 html.has-loader .welcome-main,

@@ -1,6 +1,14 @@
-/* 页面切换：加载层 + 预取目标页 + 跨页淡出（无框架） */
+﻿/* 页面切换：加载层 + 预取目标页 + 跨页淡出（无框架） */
 (() => {
   const root = document.documentElement;
+  const star = document.querySelector('.loader-star');
+  if (star && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const tick = () => {
+      star.style.transform = 'rotate(' + ((Date.now() % 1800) / 1800 * 360) + 'deg)';
+      window.requestAnimationFrame(tick);
+    };
+    tick();
+  }
 
   function revealIncoming() {
     if (!root.classList.contains('is-loading')) return;
