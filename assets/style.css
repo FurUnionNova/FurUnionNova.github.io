@@ -932,11 +932,6 @@ button { font: inherit; color: inherit; }
 [data-stagger] > *:nth-child(6) { animation-delay: .30s; }
 .welcome-main, .portal-main { animation: pageIn .6s ease backwards; }
 main.wrap { animation: slideInLeft .7s cubic-bezier(.16, .84, .3, 1) backwards; }
-body.is-leaving {
-  opacity: 0;
-  transition: opacity .24s ease;
-  pointer-events: none;
-}
 
 /* ---------- 桌面端星形鼠标 ---------- */
 @media (hover: hover) and (pointer: fine) {
@@ -947,38 +942,54 @@ body.is-leaving {
   }
 }
 
-/* ---------- 卡片铺满全屏 ---------- */
-.card-wipe {
+/* ---------- 加载层 ---------- */
+body.is-loading .welcome-head,
+body.is-loading .welcome-main,
+body.is-loading .welcome-foot,
+body.is-loading .portal-head,
+body.is-loading .portal-main,
+body.is-loading .portal-foot,
+body.is-loading .site-header,
+body.is-loading main,
+body.is-loading .site-footer {
+  opacity: .22;
+  transition: opacity .3s ease;
+}
+.page-loader {
   position: fixed;
-  z-index: 9999;
-  pointer-events: none;
-  overflow: hidden;
-  background-color: #050b14;
-  background-size: cover;
-  background-position: center;
-  will-change: left, top, width, height;
-  transition:
-    left .85s cubic-bezier(.5, .05, .2, 1),
-    top .85s cubic-bezier(.5, .05, .2, 1),
-    width .85s cubic-bezier(.5, .05, .2, 1),
-    height .85s cubic-bezier(.5, .05, .2, 1),
-    border-radius .85s ease;
-}
-.card-wipe::after {
-  content: "";
-  position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(5, 11, 20, .04), rgba(5, 11, 20, .78));
+  z-index: 9999;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  background: rgba(5, 11, 20, .8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .32s ease, visibility .32s ease;
 }
-.card-wipe .entry-body {
-  position: absolute;
-  left: 24px;
-  bottom: 24px;
-  z-index: 1;
+.page-loader.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
-.card-wipe .entry-body b { font-size: 28px; }
-.card-wipe .entry-body span { font-size: 14px; color: rgba(242, 248, 255, .75); }
-body.is-wiping { overflow: hidden; }
+.loader-star {
+  font-size: 34px;
+  line-height: 1;
+  color: #8ff0ff;
+  text-shadow: 0 0 28px rgba(94, 224, 255, .55);
+  animation: loaderSpin 1.8s linear infinite;
+}
+.page-loader p {
+  margin: 0;
+  color: rgba(242, 248, 255, .72);
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+@keyframes loaderSpin { to { transform: rotate(360deg); } }
 
 /* ---------- 背景音乐按钮 ---------- */
 .music-toggle {
@@ -1043,5 +1054,15 @@ body.is-wiping { overflow: hidden; }
   .reveal, [data-stagger] > *, .welcome-main, .portal-main, main.wrap {
     animation: none !important;
   }
-  body.is-leaving { opacity: 1; transition: none; }
+  body.is-loading .welcome-head,
+  body.is-loading .welcome-main,
+  body.is-loading .welcome-foot,
+  body.is-loading .portal-head,
+  body.is-loading .portal-main,
+  body.is-loading .portal-foot,
+  body.is-loading .site-header,
+  body.is-loading main,
+  body.is-loading .site-footer { transition: none; opacity: 1; }
+  .page-loader { transition: none; }
+  .loader-star { animation: none; }
 }
