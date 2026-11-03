@@ -1145,8 +1145,26 @@ img.is-missing { background: linear-gradient(135deg, #16263f, #0a1220); }
   border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
 }
 .social-status {
-  display: block;
-  min-height: 1.2em;
-  font-size: 11px;
-  color: var(--accent);
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  z-index: 120;
+  max-width: calc(100% - 40px);
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease;
+}
+.social-status.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }

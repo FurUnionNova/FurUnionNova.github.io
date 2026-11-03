@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   'use strict';
 
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -161,22 +161,39 @@
     });
   });
 
-  /* ---------- 复制微信号 ---------- */
+  /* ---------- 复制 QQ / 微信号 ---------- */
   const socialStatus = $('.social-status');
   let socialTimer = 0;
+  const copyText = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch { /* 忽略 */ }
+      ta.remove();
+      return ok;
+    }
+  };
+  const showCopyStatus = (message, duration = 2400) => {
+    if (!socialStatus) return;
+    socialStatus.textContent = message;
+    socialStatus.classList.add('is-visible');
+    clearTimeout(socialTimer);
+    socialTimer = setTimeout(() => socialStatus.classList.remove('is-visible'), duration);
+  };
   $$('[data-copy]').forEach((btn) => {
     btn.addEventListener('click', async () => {
       const text = btn.dataset.copy || '';
-      try {
-        await navigator.clipboard.writeText(text);
-        if (socialStatus) {
-          socialStatus.textContent = (btn.dataset.copyLabel || '微信号') + '已复制';
-          clearTimeout(socialTimer);
-          socialTimer = setTimeout(() => { socialStatus.textContent = ''; }, 1600);
-        }
-      } catch {
-        window.prompt('复制微信号', text);
-      }
+      const label = btn.dataset.copyLabel || '微信号';
+      const ok = await copyText(text);
+      showCopyStatus(ok ? label + '已复制' : '复制失败，请手动选择', ok ? 2400 : 3200);
     });
   });
   /* ---------- 年份 ---------- */
