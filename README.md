@@ -147,14 +147,21 @@ node tools/check.mjs
 
 ## 渲染与容错
 
-- 阅读进度条改用 	ransform: scaleX()，并在 equestAnimationFrame 里合并滚动更新；滚动时不再反复读 scrollHeight，避免强制重排。
+- 阅读进度条改用 `transform: scaleX()`，并在 `requestAnimationFrame` 里合并滚动更新；滚动时不再反复读 scrollHeight，避免强制重排。
 - 「返回顶部」和进度条共用同一帧更新，减少滚动事件里的重复读写。
 - 音乐按钮改成静态 HTML，JS 只负责绑定事件；不再在加载后往导航里插节点，避免布局抖动。
-- 所有 <img> 加 decoding="async"；图片加载失败时替换成透明占位并加 .is-missing，保留原尺寸，不会把布局撑坏。
-- 图集原有的 igure.is-missing 占位继续保留。
+- 所有 `<img>` 加 `decoding="async"`；图片加载失败时替换成透明占位并加 `.is-missing`，保留原尺寸，不会把布局撑坏。
+- 图集原有的 `figure.is-missing` 占位继续保留。
 
 ## 页脚署名与联系方式
 
 - 每页最底端有半透明小字「本网站由 DeepSeek Harness 搭建」；
 - QQ 和微信都做成了「复制账号」按钮（QQ 的旧临时会话链接现在会跳到“请先添加好友”的失败页）；bilibili、X 是普通外链。复制成功后底部会浮出一条小信息条，约 2.4 秒后自动淡出；失败则显示「复制失败，请手动选择」，不再弹确认框。
 - 图标使用内联 Simple Icons 品牌 SVG，不引外部 CDN，不增加额外请求。
+
+## 防爬虫
+
+- 根目录 `robots.txt` 允许普通搜索引擎，封禁常见 AI/数据采集/SEO 批量爬虫，并禁止抓取 /assets/img/、/docs/、/tools/；
+- 每个页面带 `noai, noimageai, noarchive` 的 robots meta；
+- 这是静态站能做到的“礼貌拦截”，恶意爬虫可以无视 robots；
+- 如果以后需要真正限流/挑战，需要把站点放到 Cloudflare 一类支持 Bot Fight Mode 的代理后面。
