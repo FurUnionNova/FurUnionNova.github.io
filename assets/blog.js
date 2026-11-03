@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   'use strict';
 
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -170,7 +170,7 @@
       try {
         await navigator.clipboard.writeText(text);
         if (socialStatus) {
-          socialStatus.textContent = '微信号已复制';
+          socialStatus.textContent = (btn.dataset.copyLabel || '微信号') + '已复制';
           clearTimeout(socialTimer);
           socialTimer = setTimeout(() => { socialStatus.textContent = ''; }, 1600);
         }
